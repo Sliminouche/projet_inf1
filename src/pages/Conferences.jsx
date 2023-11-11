@@ -1,104 +1,83 @@
-import React from 'react'
-import { fadeIn } from '../utils/motion';
-import {motion} from "framer-motion"
-import SectionWrapper from '../hoc/SectionWrapper';
-import facebook from "../assets/facebook.svg";
-import twitter from "../assets/twitter.svg";
-import linkedin from "../assets/linkedin.svg";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const ConferenceCard = ({
-    index,
-    title,
-    subtitle,
-   
-  }) => {
-    return (
-      <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
-  
-          <div className=' justify-center items-center  flex flex-col gap-4 '>
-            <h3 className=' font-bold text-[30px]'>{title}</h3>
-            <p className='mt-2 text-secondary text-[25px]'>{subtitle}</p>
-          </div>
+const SpotifySearch = () => {
+  const [albums, setAlbums] = useState([]);
+  const [credentials, setCredentials] = useState({});
+  const [error, setError] = useState(null);
+  const [selectedAlbum, setSelectedAlbum] = useState(null);
 
-       
-      </motion.div>
-    );
+  useEffect(() => {
+    async function fetchCredentials() {
+      try {
+        const client_id = '22c26789d4534a458986c5eca89a9584';
+        const client_secret = '2bb27261914f464184809d8c17a320d7';
+
+        const authOptions = {
+          method: 'post',
+          url: 'https://accounts.spotify.com/api/token',
+          headers: {
+            'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          data: 'grant_type=client_credentials',
+        };
+
+        const response = await axios(authOptions);
+
+        setCredentials(response.data);
+      } catch (error) {
+        console.error('erreur authentification : ', error);
+      }
+    }
+
+    fetchCredentials();
+  }, []);
+
+  useEffect(() => {
+    async function fetchAlbums() {
+      try {
+        const response = await axios.get('https://api.spotify.com/v1/artists/5K4W6rqBFWDnAN6FQUkS6x/albums', {
+          headers: {
+            Authorization: `Bearer ${credentials.access_token}`,
+          },
+        });
+
+        setAlbums(response.data.items);
+      } catch (error) {
+        console.error('erreur albums : ', error);
+      }
+    }
+
+    if (credentials.access_token) {
+      fetchAlbums();
+    }
+  }, [credentials]);
+
+  const handleRandomAlbum = () => {
+    const randomIndex = Math.floor(Math.random() * albums.length);
+    setSelectedAlbum(albums[randomIndex]);
   };
 
-const Conferences = () => {
-    const tmp = [
-        {
-            title:"Arc-en-Rêve (Bordeaux, FR) - March 12, 2020",
-            subtitle:"Discussion between Rudy Ricciotti and Philippe Trétiack led by Francine Fort as part of the exhibition MEFI - Le Stadium, Rudy Ricciotti"
-
-        },
-        {
-            title:"Arc-en-Rêve (Bordeaux, FR) - March 12, 2020",
-            subtitle:"Discussion between Rudy Ricciotti and Philippe Trétiack led by Francine Fort as part of the exhibition MEFI - Le Stadium, Rudy Ricciotti"
-
-        },
-        {
-            title:"Arc-en-Rêve (Bordeaux, FR) - March 12, 2020",
-            subtitle:"Discussion between Rudy Ricciotti and Philippe Trétiack led by Francine Fort as part of the exhibition MEFI - Le Stadium, Rudy Ricciotti"
-
-        },
-        {
-            title:"Arc-en-Rêve (Bordeaux, FR) - March 12, 2020",
-            subtitle:"Discussion between Rudy Ricciotti and Philippe Trétiack led by Francine Fort as part of the exhibition MEFI - Le Stadium, Rudy Ricciotti"
-
-        },
-        {
-            title:"Arc-en-Rêve (Bordeaux, FR) - March 12, 2020",
-            subtitle:"Discussion between Rudy Ricciotti and Philippe Trétiack led by Francine Fort as part of the exhibition MEFI - Le Stadium, Rudy Ricciotti"
-
-        },
-        {
-            title:"Arc-en-Rêve (Bordeaux, FR) - March 12, 2020",
-            subtitle:"Discussion between Rudy Ricciotti and Philippe Trétiack led by Francine Fort as part of the exhibition MEFI - Le Stadium, Rudy Ricciotti"
-
-        },
-        {
-            title:"Arc-en-Rêve (Bordeaux, FR) - March 12, 2020",
-            subtitle:"Discussion between Rudy Ricciotti and Philippe Trétiack led by Francine Fort as part of the exhibition MEFI - Le Stadium, Rudy Ricciotti"
-
-        },
-
-    ]
   return (
-    <div className=' w-full min-h-screen flex justify-center items-start ' >
-        <div className=" fixed z-20 bottom-4 left-4 flex flex-col gap-4 justify-center items-center  ">
-        <img
-          src={facebook}
-          alt=""
-          className=" cursor-pointer hover:scale-110 transition duration-200 "
-        />
-        <img
-          src={twitter}
-          alt=""
-          className=" cursor-pointer hover:scale-110 transition duration-200 "
-        />
-        <img
-          src={linkedin}
-          alt=""
-          className=" cursor-pointer hover:scale-110 transition duration-200 "
-        />
-      </div>
-
-      <div className=' fixed bottom-4 right-4 flex flex-col gap-4 justify-center items-center  ' >
-      <p className=' text-slate-500 font-semibold ' >3, place aux Huiles</p>
-      <p className=' text-slate-500 font-semibold '>13001 Marseille, France</p>
-      <p className=' text-slate-500 font-semibold '>+33 4 91 44 69 84</p>
-      <a style={{position:'relative'}} className=' hover:scale-110 transition duration-300 ' href="mailto:example@gmail.com">example@gmail.com</a>
-
-     </div>
-          <div className=' px-16 mt-20 flex flex-col gap-20'>
-        {tmp.map((project, index) => (
-          <ConferenceCard key={`project-${index}`} index={index} {...project} />
-        ))}
-      </div>
-
+    <div className="p-16">
+      {error && <p className="text-red-500">{error}</p>}
+      <button
+        onClick={handleRandomAlbum}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Quel album écouter aujourd'hui ?
+      </button>
+      {selectedAlbum && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold">Album recommandé :</h2>
+          <img src={selectedAlbum.images[0].url} alt={selectedAlbum.name} className="mt-4 rounded shadow-lg" />
+          <p className="text-xl font-bold mt-4">{selectedAlbum.name}</p>
+          <p className="text-gray-500">{selectedAlbum.release_date}</p>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default SectionWrapper(Conferences,"")
+export default SpotifySearch;

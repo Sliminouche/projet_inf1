@@ -13,6 +13,7 @@
   "dependencies": {
     "@giphy/js-fetch-api": "^5.2.0",
     "@giphy/react-components": "^9.1.0",
+    "axios": "^1.6.1",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

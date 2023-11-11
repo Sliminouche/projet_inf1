@@ -12,7 +12,7 @@ export const navlinks=[
         link:"publications"
     },
     {
-        title:"no idea",
+        title:"Album API",
         link:"conferences"
     },
 
