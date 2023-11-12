@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Navbar from './components/Navbar'
+import Navbar from './components/NavBar/NavBar'
 import Home from './pages/Home'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Projet from './pages/Projet';

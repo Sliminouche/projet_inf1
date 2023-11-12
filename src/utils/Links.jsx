@@ -1,10 +1,10 @@
 export const navlinks=[
     {
-        title:"L'entre",
+        title:"Accueil",
         link:""
     },
     {
-        title:"Crée ton meme",
+        title:"Créer ton meme",
         link:"about"
     },
     {
@@ -12,7 +12,7 @@ export const navlinks=[
         link:"publications"
     },
     {
-        title:"Album API",
+        title:"Ecoute un album",
         link:"conferences"
     },
 
