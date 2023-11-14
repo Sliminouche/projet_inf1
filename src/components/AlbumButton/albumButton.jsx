@@ -1,10 +1,8 @@
-const Button = ({ 
-    children = 'Button', 
-    disabled = false,
-    type,
-    onClick
+const AlbumButton = ({ 
+    primary,
+    onClick 
 }) => {
-    const [count, setCount] = useState(0);
+    const classNames = primary ? 'border' : 'font-bold';
 
     return (
         <>
@@ -15,7 +13,12 @@ const Button = ({
             </button>
             <span></span>
         </>
-    );
+    ); 
 }
+
+const handleRandomAlbum = () => {
+    const randomIndex = Math.floor(Math.random() * albums.length);
+    setSelectedAlbum(albums[randomIndex]);
+  };
  
-export default Button;
+export default AlbumButton;

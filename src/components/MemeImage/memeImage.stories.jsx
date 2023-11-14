@@ -1,12 +1,12 @@
 import React from 'react';
-import memeImage from './MemeImage';
+import MemeImage from './MemeImage';
 
 export default {
-    component: memeImage,
-    title: 'component/memeImage'
+    component: MemeImage,
+    title: 'component/MemeImage'
 };
 
-const Template = (args) => <memeImage {...args} />
+const Template = (args) => <MemeImage {...args} />
 
 export  const Default = Template.bind({});
 

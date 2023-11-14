@@ -1,34 +1,16 @@
 import React from 'react';
-import  albumButton from './albumButton';
+import  AlbumButton from './AlbumButton';
 
 export default {
-    component: albumButton,
-    title: 'component/albumButton'
+    component: AlbumButton,
+    title: 'component/AlbumButton'
 };
 
-const Template = (args) => <albumButton {...args} />
+const Template = (args) => <AlbumButton {...args} />
 
-export  const Default = Template.bind({});
+export  const Primary = Template.bind({});
 
-Default.args = {
-    children: 'Button',
-    loading: false,
-    disabled: false,
-}
-
-export const Loading = Template.bind({});
-
-Loading.args = {
-    children: 'Button',
-    loading: true,
-    disabled: false,
-
-}
-
-export const Disabled = Template.bind({});
-
-Disabled.args = {
-    children: 'Button',
-    disabled: true,
-    loading: false,
+Primary.args = {
+   primary: true,
+   label: 'AlbumButton',
 }
