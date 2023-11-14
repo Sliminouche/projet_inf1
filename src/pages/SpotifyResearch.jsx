@@ -164,7 +164,7 @@ export default function SpotifySearch() {
                             {similarArtists.map((artist) => (
                                 <span key={artist.id} className={"text-center"}>
                                     <div>
-                                        <img src={artist.image} alt={`Image for ${artist.name}`} className={"w-10 h-10"}/>
+                                        <img src={artist.image} alt={`Image for ${artist.name}`} className={"w-14 h-114"}/>
                                     <p
                                         className={'text-blue-500 hover:text-blue-700 cursor-pointer hover:underline'}
                                         onClick={() => {
@@ -182,12 +182,13 @@ export default function SpotifySearch() {
                         </div>
                     </>
                 )}
-                <AlbumList data={albums}/>
                 {albums.length !== 0 && (
-                    <a className={"text-orange-400 hover:text-orange-500 cursor-pointer hover:underline"}
-                        onClick={() => fetchSimilarArtistsByName(artistName)}>Ce n'est pas l'artiste que vous cherchez
+                    <a className={"text-orange-400 hover:text-orange-500 cursor-pointer hover:underline mt-2"}
+                       onClick={() => fetchSimilarArtistsByName(artistName)}>Ce n'est pas l'artiste que vous cherchez
                         ?</a>
                 )}
+                <AlbumList data={albums}/>
+
             </div>
         </>
     );

@@ -21,32 +21,36 @@ const AlbumList = ({data}) => {
     }
 
     return (
-        <div className={"grid grid-cols-3 gap-2 py-4"}>
+        <div className={"grid grid-cols-3 gap-2 gap-y-14 py-16"}>
             {data.map((item, index) => (
-                <div key={index} className={"bg-green-400 justify-center"}>
+                <div key={index} className={"justify-center text-center"}>
                     {item && typeof item === 'object' ? (
-                        Object.keys(item).map((key, i) => (
-                            <div key={i} className={"bg-orange-400"}>
-                                {key === 'image' ? (
+                        <>
+                            {item.image && (
+                                <div className={"flex justify-center"}>
                                     <img
-                                        src={item[key]}
-                                        alt={`Image for ${key}`}
-                                        className={"w-28"}
+                                        src={item.image}
+                                        alt={`Image for ${item.image}`}
+                                        className={"w-56 mb-3"}
                                     />
-                                ) : (
-                                    <>
+                                </div>
+                            )}
+
+                            {Object.keys(item)
+                                .filter((key) => key !== 'image')
+                                .map((key, i) => (
+                                    <div key={i} className={""}>
                                         <strong>{formatString(key)}</strong>
                                         {`: ${item[key]} `}
-                                    </>
-                                )}
-                            </div>
-                        ))
-                    ) : (" ")
-                    }
+                                    </div>
+                                ))}
+                        </>
+                    ) : (" ")}
                 </div>
             ))}
         </div>
     );
+
 };
 
 export default AlbumList;

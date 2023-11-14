@@ -1,6 +1,6 @@
 export const navlinks=[
     {
-        title:"L'entre",
+        title:"LA GROTTE DE SLIM",
         link:""
     },
     {
