@@ -1,16 +1,15 @@
 import React from 'react';
-import  AlbumButton from './AlbumButton';
+import AlbumButton from './AlbumButton';
 
 export default {
-    component: AlbumButton,
-    title: 'component/AlbumButton'
+  title: 'AlbumButton',
+  component: AlbumButton,
 };
 
-const Template = (args) => <AlbumButton {...args} />
-
-export  const Primary = Template.bind({});
-
-Primary.args = {
-   primary: true,
-   label: 'AlbumButton',
-}
+export const Default = () => (
+  <AlbumButton
+    title="Quel album écouter aujourd'hui ?"
+    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    onClick={() => console.log('Button clicked')}
+  />
+);

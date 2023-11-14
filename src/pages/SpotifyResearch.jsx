@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Input from '../components/Input.jsx';
-import Button from '../components/Button.jsx';
+import Button from '../components/Button/Button.jsx';
 import AlbumList from '../components/AlbumList.jsx';
 
 export default function SpotifySearch() {

@@ -1,37 +1,19 @@
 import React from 'react';
-import NavBar from './NavBar';
+import { NavBar } from './NavBar'; 
+import { action } from '@storybook/addon-actions';
 
 export default {
-    component: NavBar,
-    title: 'component/NavBar'
+  title: 'NavBar',
+  component: NavBar,
 };
 
+const Template = (args) => <NavBar {...args} />;
 
-const Template = (args) => <NavBar {...args} />
-
-export  const Default = Template.bind({});
-
+export const Default = Template.bind({});
 Default.args = {
-    children: 'NavBar',
-    loading: false,
-    disabled: false,
-}
-
-/*
-export const Loading = Template.bind({});
-
-Loading.args = {
-    children: 'Button',
-    loading: true,
-    disabled: false,
-
-}
-
-export const Disabled = Template.bind({});
-
-Disabled.args = {
-    children: 'Button',
-    disabled: true,
-    loading: false,
-}
-*/
+  // Vous pouvez spécifier des valeurs par défaut pour les propriétés de votre composant ici
+  // Par exemple:
+  // title: 'Mon titre',
+  // link: '/accueil',
+  // onClick: action('Cliqué sur la navbar'),
+};

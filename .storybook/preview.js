@@ -1,6 +1,6 @@
 /** @type { import('@storybook/react').Preview } */
 
-import '../src/index.css'; // replace with the name of your tailwind css file
+import '../src/index.css';
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
