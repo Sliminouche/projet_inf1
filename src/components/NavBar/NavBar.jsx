@@ -3,7 +3,7 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { navlinks } from "../utils/Links";
+import { navlinks } from "../../utils/Links";
 
 const NavBarItem = ({ title, link, onClick }) => {
   return (

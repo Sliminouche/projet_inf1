@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormComponent from "../components/formulaire";
-import MemeComponent from "../components/meme_image";
+import MemeComponent from "../components/MemeImage/memeImage";
 
 const About = () => {
   const [Memes, setMemes] = useState([]);

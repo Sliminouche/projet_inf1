@@ -4,11 +4,11 @@ export const navlinks=[
         link:""
     },
     {
-        title:"Crée ton meme",
+        title:"Créer ton meme",
         link:"about"
     },
     {
-        title:"Album API",
+        title:"Ecoute un album",
         link:"conferences"
     },
     {
