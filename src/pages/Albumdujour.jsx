@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import AlbumButton from '../components/AlbumButton/AlbumButton.jsx';
+
 const SpotifySearch = () => {
   const [albums, setAlbums] = useState([]);
   const [credentials, setCredentials] = useState({});
@@ -63,12 +65,11 @@ const SpotifySearch = () => {
   return (
     <div className="p-16">
       {error && <p className="text-red-500">{error}</p>}
-      <button
+       <AlbumButton
+        title={" Quel album écouter aujourd'hui ?"}
+        className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}
         onClick={handleRandomAlbum}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Quel album écouter aujourd'hui ?
-      </button>
+      />
       {selectedAlbum && (
         <div className="mt-8">
           <h2 className="text-2xl font-bold">Album recommandé :</h2>
@@ -83,3 +84,14 @@ const SpotifySearch = () => {
 
 
 export default SpotifySearch;
+
+
+/*
+
+      <button
+        onClick={handleRandomAlbum}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Quel album écouter aujourd'hui ?
+      </button>
+      */

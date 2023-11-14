@@ -1,6 +1,5 @@
 import React from "react";
 
-/*
 export default function MemeComponent({ image, textHaut, textBas }) {
   return (
     <div className="meme">
@@ -10,8 +9,8 @@ export default function MemeComponent({ image, textHaut, textBas }) {
     </div>
   );
 }
-*/
 
+/*
 const MemeComponent = ({ image, textHaut, textBas }) => {
   return (
     <div className="meme">
@@ -23,4 +22,4 @@ const MemeComponent = ({ image, textHaut, textBas }) => {
 }
 
 export default MemeComponent;
-
+*/
