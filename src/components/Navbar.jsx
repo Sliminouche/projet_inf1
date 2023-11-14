@@ -26,7 +26,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="w-full flex md:justify-center justify-between p-4 items-center" style={{ backgroundColor: 'pink' }}>
+    <nav className="w-full flex md:justify-center justify-between p-4 items-center" style={{ backgroundColor: 'pink', borderBottom :"100px" }}>
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
         <p className="flex flex-row gap-2 text-[20px]">
           Troll land <span className="text-[12px]">hehe 😁</span>
