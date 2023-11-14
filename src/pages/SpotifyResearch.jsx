@@ -12,6 +12,8 @@ export default function SpotifySearch() {
     const [artistName, setArtistName] = useState('');
     const [artistId, setArtistId] = useState('');
     const [similarArtists, setSimilarArtists] = useState([]);
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         async function fetchCredentials() {
@@ -41,22 +43,26 @@ export default function SpotifySearch() {
     }, []);
 
     async function fetchArtistId(artistName) {
-        try {
-            const response = await axios.get(
-                `https://api.spotify.com/v1/search?q=${artistName}&type=artist&limit=1`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${credentials.access_token}`,
-                    },
-                }
-            );
+        if (artistName.trim() === '') {
+            setError("L'input ne peut être vide, saisis un nom d'artiste !");
+        } else {
+            try {
+                const response = await axios.get(
+                    `https://api.spotify.com/v1/search?q=${artistName}&type=artist&limit=1`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${credentials.access_token}`,
+                        },
+                    }
+                );
 
-            const artistId = response.data.artists.items[0].id;
-            console.log(artistId);
-            return artistId;
-        } catch (error) {
-            setError('Artiste introuvable. Veuillez réessayer.');
-            throw error;
+                const artistId = response.data.artists.items[0].id;
+                console.log(artistId);
+                return artistId;
+            } catch (error) {
+                setError('Artiste introuvable. Veuillez réessayer.');
+                throw error;
+            }
         }
     }
 
@@ -77,20 +83,25 @@ export default function SpotifySearch() {
 
             let albums = response.data.items;
 
-            albums = albums.map((album) => {
-                if (album.album_type === 'album') {
-                    return {
-                        nom: album.name,
-                        date_de_sortie: album.release_date,
-                        nombre_total_de_musiques: album.total_tracks,
-                        image: album.images[0].url,
-                    };
-                }
-            });
+            albums = albums
+                .map((album) => {
+                    if (album.album_type === 'album') {
+                        return {
+                            nom: album.name,
+                            date_de_sortie: album.release_date,
+                            nombre_total_de_musiques: album.total_tracks,
+                            image: album.images[0].url,
+                        };
+                    } else {
+                        return null;
+                    }
+                })
+                .filter((album) => album !== null);
 
             setAlbums(albums);
+
             setError(null);
-            console.log("albums dans le state",albums)
+            console.log("albums dans le state", albums)
 
         } catch (error) {
             console.error("Pas d'album trouvé pour cet artiste :", error);
@@ -127,34 +138,53 @@ export default function SpotifySearch() {
         }
     }
 
+    const handleButtonClick = async () => {
+        try {
+            setLoading(true);
+            await fetchArtistAlbums();
+        } catch (error) {
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 3000);
+        }
+    };
+
     return (
         <>
             <div className={'h-screen w-screen py-32 px-52 overflow-y-auto'}>
                 <p className={"text-2xl font-bold py-2"}>SpotifySearch</p>
-                <p className={"py-2"}>Passionnés par la musique, nous avons décidé d'exploiter l'API Spotify sur deux pages de notre projet.
-                    <br/>Dans cette section, il vous suffit d'entrer le nom d'un artiste pour accéder à sa discographie complète (à condition que ce dernier soit disponible et listé sur Spotify).</p>
+                <p className={"py-2"}>Passionnés par la musique, nous avons décidé d'exploiter l'API Spotify sur deux
+                    pages de notre projet.
+                    <br/>Dans cette section, il vous suffit d'entrer le nom d'un artiste pour accéder à sa discographie
+                    complète (à condition que ce dernier soit disponible et listé sur Spotify).</p>
                 <div className={"p-4 bg-white border border-dashed border-gray-400"}>
-                    <p className={"font-bold italic"}>Instructions à suivre pour utiliser toutes les fonctionnalités de cette page :</p>
+                    <p className={"font-bold italic"}>Instructions à suivre pour utiliser toutes les fonctionnalités de
+                        cette page :</p>
                     <ul className={"list-disc ml-12 mt-1"}>
-                        <li>Entrez le nom d'un artiste que vous appréciez et cliquez sur le bouton <strong>"Rechercher"</strong></li>
+                        <li>Entrez le nom d'un artiste que vous appréciez et cliquez sur le
+                            bouton <strong>"Rechercher"</strong></li>
                         <li>Une fois la liste d'albums chargée, cliquez</li>
                     </ul>
                 </div>
-                <div className={"mt-2"}>
+                <div className={"mt-2 flex items-end"}>
                     <Input
                         label={"Nom de l'artiste"}
                         className={'w-44'}
                         value={artistName}
+                        required={true}
                         onChange={(e) => setArtistName(e.target.value)}
+                        onEnterPress={handleButtonClick} // Appeler la fonction handleButtonClick lors de l'appui sur "Entrée"
                     />
+
                     <Button
                         title={'Rechercher'}
-                        className={
-                            'ml-2 font-normal border-black border-dashed bg-emerald-300 hover:bg-emerald-400'
-                        }
-                        onClick={fetchArtistAlbums}
+                        className={'ml-2 font-normal border-black border-dashed bg-emerald-300 hover:bg-emerald-400 '}
+                        onClick={handleButtonClick}
+                        loading={loading}
                     />
                 </div>
+
 
                 {error && <div className={"text-red-400"}>{error}</div>}
                 {similarArtists.length !== 0 && (
@@ -164,7 +194,8 @@ export default function SpotifySearch() {
                             {similarArtists.map((artist) => (
                                 <span key={artist.id} className={"text-center"}>
                                     <div>
-                                        <img src={artist.image} alt={`Image for ${artist.name}`} className={"w-14 h-114"}/>
+                                        <img src={artist.image} alt={`Image for ${artist.name}`}
+                                             className={"w-14 h-14"}/>
                                     <p
                                         className={'text-blue-500 hover:text-blue-700 cursor-pointer hover:underline'}
                                         onClick={() => {
@@ -183,7 +214,7 @@ export default function SpotifySearch() {
                     </>
                 )}
                 {albums.length !== 0 && (
-                    <a className={"text-orange-400 hover:text-orange-500 cursor-pointer hover:underline mt-2"}
+                    <a className={"text-gray-500 hover:text-red-500 cursor-pointer hover:underline mt-2"}
                        onClick={() => fetchSimilarArtistsByName(artistName)}>Ce n'est pas l'artiste que vous cherchez
                         ?</a>
                 )}
@@ -191,5 +222,6 @@ export default function SpotifySearch() {
 
             </div>
         </>
-    );
+    )
+        ;
 }

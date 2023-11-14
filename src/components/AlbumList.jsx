@@ -24,28 +24,27 @@ const AlbumList = ({data}) => {
         <div className={"grid grid-cols-3 gap-2 gap-y-14 py-16"}>
             {data.map((item, index) => (
                 <div key={index} className={"justify-center text-center"}>
-                    {item && typeof item === 'object' ? (
-                        <>
-                            {item.image && (
-                                <div className={"flex justify-center"}>
-                                    <img
-                                        src={item.image}
-                                        alt={`Image for ${item.image}`}
-                                        className={"w-56 mb-3"}
-                                    />
-                                </div>
-                            )}
+                    <>
+                        {item.image && (
+                            <div className={"flex justify-center"}>
+                                <img
+                                    src={item.image}
+                                    alt={`Image for ${item.image}`}
+                                    className={"w-56 mb-3"}
+                                />
+                            </div>
+                        )}
 
-                            {Object.keys(item)
-                                .filter((key) => key !== 'image')
-                                .map((key, i) => (
-                                    <div key={i} className={""}>
-                                        <strong>{formatString(key)}</strong>
-                                        {`: ${item[key]} `}
-                                    </div>
-                                ))}
-                        </>
-                    ) : (" ")}
+                        {Object.keys(item)
+                            .filter((key) => key !== 'image')
+                            .map((key, i) => (
+                                <div key={i} className={""}>
+                                    <strong>{formatString(key)}</strong>
+                                    {`: ${item[key]} `}
+                                </div>
+                            ))}
+                    </>
+
                 </div>
             ))}
         </div>
