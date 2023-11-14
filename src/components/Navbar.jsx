@@ -7,7 +7,7 @@ import { navlinks } from "../utils/Links";
 
 const NavBarItem = ({ title, link, onClick }) => {
   return (
-    <li onClick={() => onClick(link)} style={{ position: "relative" }} className="mx-4 cursor-pointer">
+    <li onClick={() => onClick(link)} style={{ position: "relative" }} className="mx-4 cursor-pointer hover:underline">
       {title}
     </li>
   );
