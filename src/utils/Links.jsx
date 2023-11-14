@@ -8,10 +8,6 @@ export const navlinks=[
         link:"about"
     },
     {
-        title:"Dans les yeux",
-        link:"publications"
-    },
-    {
         title:"Album API",
         link:"conferences"
     },

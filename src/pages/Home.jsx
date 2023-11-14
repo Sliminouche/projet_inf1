@@ -6,7 +6,7 @@ import twitter from '../assets/twitter.svg';
 import linkedin from '../assets/linkedin.svg';
 import backImage from '../assets/back.jpg';
 
-const Item = ({ gifUrl, index }) => {
+const Item = ({ gifUrl, gifName }) => {
   const navigate = useNavigate();
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -46,9 +46,9 @@ const Item = ({ gifUrl, index }) => {
       <img
         style={{ boxShadow: '0 0 7px rgba(0,0,0,0.5)' }}
         src={gifUrl}
-        alt={`GIF ${index}`}
+        alt={`GIF ${gifName}`}
         className="hover:cursor-pointer h-[500px] w-[300px] hover:opacity-50 object-cover"
-        onClick={() => navigate(`/projet/${index}`)}
+        //onClick={() => navigate(`/projet/${gifName}`)}
       />
       {showTooltip && (
         <motion.div
@@ -58,7 +58,7 @@ const Item = ({ gifUrl, index }) => {
           transition={{ duration: 0.2 }}
           className="absolute z-10 hover:cursor-pointer opacity-100 text-[20px] bottom-[10%] p-2 text-black rounded w-full text-center"
         >
-          <p>{`GIF ${index}`}</p>
+          <p>{`GIF ${gifName}`}</p>
           <motion.button
             className="gif-button"
             onClick={downloadGif}
@@ -90,12 +90,15 @@ const Home = () => {
       try {
         const response = await fetch(searchUrl);
         const data = await response.json();
-        const gifUrls = data.data.map((gif) => gif.images.fixed_height.url);
-        setGifs(gifUrls);
-        setLoading(false); // Set loading to false once images are loaded
+        const gifData = data.data.map((gif) => ({
+          url: gif.images.fixed_height.url,
+          name: gif.title,
+        }));
+        setGifs(gifData);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching GIFs:', error);
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false); 
       }
     };
 
@@ -103,9 +106,15 @@ const Home = () => {
   }, []);
 
   return (
+<<<<<<< HEAD
+    <div className={`px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 py-10 ${loading ? 'loading' : ''}`} style={{ backgroundImage: `url(${backImage})`,  backgroundAttachment: 'fixed',    paddingTop: '100px' }}>
+      {gifs.map((gifData, index) => (
+        <Item key={index} gifUrl={gifData.url} gifName={gifData.name} />
+=======
     <div className={`px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 py-10 ${loading ? 'loading' : ''}`} style={{  paddingTop: '100px' }}>
       {gifs.map((gifUrl, index) => (
         <Item key={index} gifUrl={gifUrl} index={index + 1} />
+>>>>>>> main
       ))}
 
       <div className="fixed z-20 bottom-4 left-4 flex flex-col gap-4 justify-center items-center">
