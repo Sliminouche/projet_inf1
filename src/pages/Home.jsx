@@ -106,9 +106,15 @@ const Home = () => {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div className={`px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 py-10 ${loading ? 'loading' : ''}`} style={{ backgroundImage: `url(${backImage})`,  backgroundAttachment: 'fixed',    paddingTop: '100px' }}>
       {gifs.map((gifData, index) => (
         <Item key={index} gifUrl={gifData.url} gifName={gifData.name} />
+=======
+    <div className={`px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 py-10 ${loading ? 'loading' : ''}`} style={{  paddingTop: '100px' }}>
+      {gifs.map((gifUrl, index) => (
+        <Item key={index} gifUrl={gifUrl} index={index + 1} />
+>>>>>>> main
       ))}
 
       <div className="fixed z-20 bottom-4 left-4 flex flex-col gap-4 justify-center items-center">
@@ -129,11 +135,6 @@ const Home = () => {
         />
       </div>
 
-      <div className="fixed bottom-4 right-4 flex flex-col gap-4 justify-center items-center" style={{ color: 'white' }}>
-        <p className="text-slate-500 font-semibold" style={{ color: 'white' }}>9, place zinzin</p>
-        <p className="text-slate-500 font-semibold" style={{ color: 'white' }}>13001 Trolland, France</p>
-        <a style={{ position: 'relative' }} className="hover:scale-110 transition duration-300" href="mailto:poto.rigole@stp.com">poto.rigole@stp.com</a>
-      </div>
     </div>
   );
 };

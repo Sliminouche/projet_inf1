@@ -11,5 +11,9 @@ export const navlinks=[
         title:"Album API",
         link:"conferences"
     },
+    {
+        title:"SpotifyResearch",
+        link:"spotify_research"
+    },
 
 ]

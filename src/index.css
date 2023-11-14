@@ -138,39 +138,6 @@ main {
   }  
 
 
-  li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background-color: #000;
-    transition: width 0.5s ease;
-  }
-  
-  li:hover::before {
-    width: 100%;
-  }  
-  a::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background-color: #000;
-    transition: width 0.5s ease;
-  }
-  
-  a:hover::before {
-    width: 100%;
-  }  
-
-
-  
-
-
 
   .swiper-pagination-fraction {
     font-size: 30px; /* Adjust the desired font size */
