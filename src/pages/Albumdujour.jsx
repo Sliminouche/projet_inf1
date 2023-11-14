@@ -44,6 +44,7 @@ const SpotifySearch = () => {
         });
 
         setAlbums(response.data.items);
+        console.log(response.data.items)
       } catch (error) {
         console.error('erreur albums : ', error);
       }
@@ -79,5 +80,6 @@ const SpotifySearch = () => {
     </div>
   );
 };
+
 
 export default SpotifySearch;

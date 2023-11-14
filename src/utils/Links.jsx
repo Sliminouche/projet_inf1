@@ -1,6 +1,6 @@
 export const navlinks=[
     {
-        title:"Accueil",
+        title:"LA GROTTE DE SLIM",
         link:""
     },
     {
@@ -8,12 +8,12 @@ export const navlinks=[
         link:"about"
     },
     {
-        title:"Dans les yeux",
-        link:"publications"
-    },
-    {
         title:"Ecoute un album",
         link:"conferences"
+    },
+    {
+        title:"SpotifyResearch",
+        link:"spotify_research"
     },
 
 ]

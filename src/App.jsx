@@ -2,11 +2,10 @@ import { useState } from 'react'
 import Navbar from './components/NavBar/NavBar'
 import Home from './pages/Home'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Projet from './pages/Projet';
 import Contact from './pages/Contact';
-import About from './pages/About';
-import Publications from './pages/Publications';
-import Conferences from './pages/Conferences';
+import About from './pages/Meme';
+import Conferences from './pages/Albumdujour';
+import SpotifySearch from "./pages/SpotifyResearch.jsx";
 
 function App() {
 
@@ -23,17 +22,17 @@ function App() {
           
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/projet/:id" element={<Projet />} />
+                {/* <Route path="/projet/:id" element={<Projet />} /> */}
                 <Route path="/contacts" element={<Contact />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/publications" element={<Publications />} />
                 <Route path="/conferences" element={<Conferences />} />
+                <Route path ="/spotify_research" element={<SpotifySearch/>}/>
                 
               </Routes>
             </div>
-    </div>
-      
-  )
+        </div>
+
+    )
 }
 
 export default App
