@@ -1,10 +1,10 @@
 export const navlinks=[
     {
-        title:"LA GROTTE DE SLIM",
+        title:"Trouve ton meme",
         link:""
     },
     {
-        title:"Créer ton meme",
+        title:"Crée ton meme",
         link:"creerunmeme"
     },
     {
@@ -12,7 +12,7 @@ export const navlinks=[
         link:"trouveralbum"
     },
     {
-        title:"SpotifyResearch",
+        title:"Trouve un album",
         link:"spotify_research"
     },
 

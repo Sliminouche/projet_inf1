@@ -61,7 +61,7 @@ main {
   margin-left: 35%;
   max-width: 30%;
   font-family: "Karla", sans-serif;
-  background: linear-gradient(90deg, #4c8a54, #81c3dc 100%);
+  background-color: #1D201F;
   color: white;
   border: none;
   cursor: pointer;
@@ -72,7 +72,7 @@ main {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .form-button:active {
-  background: linear-gradient(90deg, #4c8a54, #81c3dc 100%);
+  background: linear-gradient(90deg, #C58882, #DF928E 100%);
   border: 1px solid black;
 }
 
@@ -154,7 +154,7 @@ main {
   .form-input {
     margin: 10px;
     padding: 8px;
-    border: 2px solid #3498db;
+    border: 2px solid #DF928E;
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease-in-out;
@@ -162,14 +162,14 @@ main {
   
   .form-input:focus {
     outline: none;
-    border-color: #2ecc71;
+    border-color: #C58882;
   }
   
   .form-button {
     margin: 10px;
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #3498db;
+    background-color: #1D201F;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -178,13 +178,13 @@ main {
   }
   
   .form-button:hover {
-    background-color: #2ecc71;
+    background-color: #C58882;
   }
   
   .form-input {
     margin: 10px;
     padding: 8px;
-    border: 2px solid #3498db;
+    border: 2px solid #C58882;
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease-in-out;
@@ -193,16 +193,16 @@ main {
   
   @keyframes blink {
     0%, 100% {
-      border-color: #3498db;
+      border-color: #C58882;
     }
     50% {
-      border-color: #2ecc71;
+      border-color: #DF928E;
     }
   }
   
   .form-input:focus {
     outline: none;
-    border-color: #2ecc71;
+    border-color: #DF928E;
     animation: none; /* Désactive l'animation lorsque le champ est en focus */
   }
   
@@ -210,7 +210,7 @@ main {
     margin: 10px;
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #3498db;
+    background-color: #1D201F;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -223,10 +223,10 @@ main {
   
   @keyframes blink {
     0%, 100% {
-      background-color: #3498db;
+      background-color: #C58882;
     }
     50% {
-      background-color: #2ecc71;
+      background-color: #DF928E;
     }
   }
   .form-input[name="textHaut"]::placeholder {
@@ -240,7 +240,6 @@ main {
     margin: 10px;
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #3498db;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -294,4 +293,17 @@ main {
   border: 4px solid #ccc;
   border-top: 4px solid #3498db;
   animation: spin 1s linear infinite;
+}
+
+.ge {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #1D201F !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%; 
+  animation: blink 1s infinite alternate; 
 }

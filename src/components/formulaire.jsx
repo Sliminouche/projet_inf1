@@ -19,7 +19,7 @@ export default function FormComponent({ Image, changeMeme, handleSubmit }) {
         value={Image.textBas}
         onChange={changeMeme}
       />
-      <button className="form-button">Change de meme</button>
+      <button className="ge">Change de meme</button>
     </form>
   );
 }

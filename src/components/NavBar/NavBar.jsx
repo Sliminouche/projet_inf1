@@ -7,7 +7,11 @@ import { navlinks } from "../../utils/Links";
 
 const NavBarItem = ({ title, link, onClick }) => {
   return (
-    <li onClick={() => onClick(link)} style={{ position: "relative" }} className="mx-4 cursor-pointer hover:underline">
+    <li
+      onClick={() => onClick(link)}
+      style={{ position: "relative", color: "white" }}
+      className="mx-4 cursor-pointer hover:underline"
+    >
       {title}
     </li>
   );
@@ -26,11 +30,16 @@ function Navbar() {
   };
 
   return (
-    <nav className="w-full flex md:justify-center justify-between p-4 items-center" style={{ backgroundColor: 'pink', borderBottom :"100px" }}>
+    <nav
+      className="w-full flex md:justify-center justify-between p-4 items-center"
+      style={{
+        backgroundColor: '#1D201F',
+        borderBottom: "100px",
+        color: "white", // Change text color to white
+      }}
+    >
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <p className="flex flex-row gap-2 text-[20px]">
-          Troll land <span className="text-[12px]">hehe 😁</span>
-        </p>
+        <p className="flex flex-row gap-2 text-[20px]">Mem(usiqu)es</p>
       </div>
 
       <motion.ul
@@ -38,7 +47,7 @@ function Navbar() {
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: -100 }}
         transition={{ duration: 2 }}
-        className="text-black md:flex hidden list-none flex-row justify-between items-center flex-initial"
+        className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial"
       >
         {navlinks.map((item, index) => (
           <NavBarItem
@@ -54,13 +63,13 @@ function Navbar() {
         {toggle ? (
           <AiOutlineClose
             fontSize={28}
-            className="text-black md:hidden cursor-pointer"
+            className="text-white md:hidden cursor-pointer"
             onClick={handleToggleClick}
           />
         ) : (
           <HiMenuAlt4
             fontSize={28}
-            className="text-black md:hidden cursor-pointer"
+            className="text-white md:hidden cursor-pointer"
             onClick={handleToggleClick}
           />
         )}

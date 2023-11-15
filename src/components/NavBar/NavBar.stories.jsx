@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from './Navbar';
+import NavBar from './NavBar';
 
 export default {
-  title: 'Navbar',
-  component: Navbar,
+  title: 'NavBar',
+  component: NavBar,
 };
 
 const Template = (args) => <NavBar {...args} />
