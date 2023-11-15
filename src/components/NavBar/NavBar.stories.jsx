@@ -1,20 +1,17 @@
 import React from 'react';
 import NavBar from './NavBar';
+import { MemoryRouter as Router } from 'react-router-dom';
 
 export default {
   title: 'NavBar',
   component: NavBar,
 };
 
-const Template = (args) => <NavBar {...args} />
+const Template = (args) => (
+  <Router>
+    <NavBar {...args} />
+  </Router>
+);
 
 export const Default = Template.bind({});
 Default.args = {};
-
-export const WithDifferentProps = Template.bind({});
-WithDifferentProps.args = {
-  // Pass different props if needed
-  // Example: toggle: true
-};
-
-// You can add more stories as needed
