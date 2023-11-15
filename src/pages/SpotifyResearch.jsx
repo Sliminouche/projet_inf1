@@ -218,7 +218,7 @@ export default function SpotifyResearch() {
                 {albums.length !== 0 && (
                     <div className={"mt-2"}>
 
-                        <a className={"text-gray-500 hover:text-red-500 cursor-pointer hover:underline mt-3"}
+                        <a className={"text-red-500  hover:text-red-600 cursor-pointer hover:underline mt-3"}
                            onClick={() => fetchSimilarArtistsByName(artistName)}>Ce n'est pas l'artiste que vous
                             cherchez
                             ?</a>

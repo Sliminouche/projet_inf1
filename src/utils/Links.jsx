@@ -5,15 +5,15 @@ export const navlinks=[
     },
     {
         title:"Crée ton meme",
-        link:"creerunmeme"
+        link:"create-meme"
     },
     {
-        title:"Ecoute un album",
-        link:"trouveralbum"
+        title:"Écoute un album",
+        link:"find-your-album"
     },
     {
         title:"Trouve un album",
-        link:"spotify_research"
+        link:"spotify-research"
     },
 
 ]

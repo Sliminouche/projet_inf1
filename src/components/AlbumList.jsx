@@ -72,47 +72,51 @@ const AlbumList = ({data, spotifyCredentials}) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    if (!data) {
-        return null;
-    }
-
-    return (
-        <div className={"grid grid-cols-3 gap-x-4 gap-y-6 py-16  "}>
-            {data.map((item, index) => (
-                <div key={index}
-                     className={"cursor-pointer hover:bg-gray-100 hover:ring-2 ring-inset transition duration-100 ring-gray-200 justify-center text-center border border-gray-300 rounded pb-3 px-3"}
-                     onClick={() => openModal(item)}>
-                    <>
-                        {item.image && (
-                            <div className={"flex justify-center"}>
-                                <img
-                                    src={item.image}
-                                    alt={`Image for ${item.image}`}
-                                    className={"w-56 my-4"}
-                                />
-                            </div>
-                        )}
-
-                        {Object.keys(item)
-                            .filter((key) => key !== 'image' && key !== 'id') // permet d'ignorer l attribut id
-                            .map((key, i) => (
-                                <div key={i} className={""}>
-                                    <strong>{formatElementAttribut(key)}</strong>
-                                    {`: ${key === 'date_de_sortie' ? formatDate(item[key]) : item[key]} `}
+    if (data.length === 0) {
+        return  (
+            <div className={"flex justify-center"}>
+                <p className={"text-2xl text-gray-500 mt-36"}>Aucun résultat pour cet artiste !</p>
+            </div>
+        )
+    } else {
+        return (
+            <div className={"grid grid-cols-3 gap-x-4 gap-y-6 py-16  "}>
+                {data.map((item, index) => (
+                    <div key={index}
+                         className={"cursor-pointer hover:bg-gray-100 hover:ring-2 ring-inset transition duration-100 ring-gray-200 justify-center text-center border border-gray-300 rounded pb-3 px-3"}
+                         onClick={() => openModal(item)}>
+                        <>
+                            {item.image && (
+                                <div className={"flex justify-center"}>
+                                    <img
+                                        src={item.image}
+                                        alt={`Image for ${item.image}`}
+                                        className={"w-56 my-4"}
+                                    />
                                 </div>
-                            ))}
-                    </>
+                            )}
 
-                </div>
-            ))}
+                            {Object.keys(item)
+                                .filter((key) => key !== 'image' && key !== 'id') // permet d'ignorer l attribut id
+                                .map((key, i) => (
+                                    <div key={i} className={""}>
+                                        <strong>{formatElementAttribut(key)}</strong>
+                                        {`: ${key === 'date_de_sortie' ? formatDate(item[key]) : item[key]} `}
+                                    </div>
+                                ))}
+                        </>
+
+                    </div>
+                ))}
 
 
-            {selectedAlbum && (
-                <AlbumDetailsModal open={isModalOpen} setOpen={closeModal} album={selectedAlbum}
-                                   albumTracks={albumTracks}/>
-            )}
-        </div>
-    );
+                {selectedAlbum && (
+                    <AlbumDetailsModal open={isModalOpen} setOpen={closeModal} album={selectedAlbum}
+                                       albumTracks={albumTracks}/>
+                )}
+            </div>
+        );
+    }
 };
 
 export default AlbumList;

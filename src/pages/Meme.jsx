@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FormComponent from "../components/formulaire";
+import FormComponent from "../components/FormulaireMeme.jsx";
 import MemeComponent from "../components/MemeImage/memeImage";
 
 const MemePage = () => {

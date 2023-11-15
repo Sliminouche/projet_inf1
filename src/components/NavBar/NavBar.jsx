@@ -9,8 +9,7 @@ const NavBarItem = ({ title, link, onClick }) => {
   return (
     <li
       onClick={() => onClick(link)}
-      style={{ position: "relative", color: "white" }}
-      className="mx-4 cursor-pointer hover:underline"
+      className="mx-4 cursor-pointer text-white hover:underline hover:text-gray-300 "
     >
       {title}
     </li>
@@ -39,7 +38,7 @@ function Navbar() {
       }}
     >
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <p className="flex flex-row gap-2 text-[20px]">Mem(usiqu)es</p>
+        <p className="flex flex-row gap-2 text-[20px] cursor-pointer" onClick={()=>handleNavItemClick('')}>Mem(usiqu)es</p>
       </div>
 
       <motion.ul
