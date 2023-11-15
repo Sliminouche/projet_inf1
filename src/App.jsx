@@ -3,7 +3,7 @@ import Navbar from './components/NavBar/NavBar'
 import Home from './pages/Home'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import MemePage from './pages/Meme';
-import AlbumduJour from './pages/Albumdujour';
+import AlbumDuJour from './pages/AlbumDuJour.jsx';
 import SpotifyResearch from "./pages/SpotifyResearch.jsx";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 {/* <Route path="/projet/:id" element={<Projet />} /> */}
                 <Route path="/creerunmeme" element={<MemePage />} />
-                <Route path="/trouveralbum" element={<AlbumduJour />} />
+                <Route path="/trouveralbum" element={<AlbumDuJour />} />
                 <Route path ="/spotify_research" element={<SpotifyResearch/>}/>
                 
               </Routes>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import AlbumButton from '../components/AlbumButton/AlbumButton.jsx';
 import {fetchSpotifyCredentials} from "../services/SpotifyService.jsx";
 
-const AlbumduJour = () => {
+const AlbumDuJour = () => {
   const [albums, setAlbums] = useState([]);
   const [credentials, setCredentials] = useState({});
   const [error, setError] = useState(null);
@@ -76,4 +76,4 @@ const AlbumduJour = () => {
   );
 };
 
-export default AlbumduJour;
+export default AlbumDuJour;
