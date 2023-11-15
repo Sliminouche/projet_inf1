@@ -1,5 +1,5 @@
-export default function Input({ label, name, type, value, onChange, className, required, onEnterPress, ...props }) {
-    const inputClassName = `text-sm border px-2 h-10 rounded-sm ${className || ''}`;
+export default function Input({label, name, type, value, onChange, className, required, onEnterPress, ...props}) {
+    const inputClassName = `text-sm transition-all focus:ring-2 ring-inset ring-gray-200 outline-0 border px-2 h-10 rounded-sm ${className || ''}`;
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
@@ -9,7 +9,7 @@ export default function Input({ label, name, type, value, onChange, className, r
 
     return (
         <div className={"block"}>
-            <label className="block text-gray-700 font-bold text-sm mb-2" htmlFor={name}>
+            <label className="block  text-gray-700 font-bold text-sm mb-2" htmlFor={name}>
                 {label}
             </label>
             <input

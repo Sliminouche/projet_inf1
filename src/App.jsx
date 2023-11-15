@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import MemePage from './pages/Meme';
 import AlbumduJour from './pages/Albumdujour';
-import SpotifySearch from "./pages/SpotifyResearch.jsx";
+import SpotifyResearch from "./pages/SpotifyResearch.jsx";
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
                 {/* <Route path="/projet/:id" element={<Projet />} /> */}
                 <Route path="/creerunmeme" element={<MemePage />} />
                 <Route path="/trouveralbum" element={<AlbumduJour />} />
-                <Route path ="/spotify_research" element={<SpotifySearch/>}/>
+                <Route path ="/spotify_research" element={<SpotifyResearch/>}/>
                 
               </Routes>
             </div>

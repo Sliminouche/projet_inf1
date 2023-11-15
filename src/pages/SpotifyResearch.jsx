@@ -4,13 +4,11 @@ import Input from '../components/Input.jsx';
 import Button from '../components/Button/Button.jsx';
 import AlbumList from '../components/AlbumList.jsx';
 
-export default function SpotifySearch() {
+export default function SpotifyResearch() {
     const [albums, setAlbums] = useState([]);
     const [credentials, setCredentials] = useState({});
     const [error, setError] = useState(null);
-    const [selectedAlbum, setSelectedAlbum] = useState(null);
     const [artistName, setArtistName] = useState('');
-    const [artistId, setArtistId] = useState('');
     const [similarArtists, setSimilarArtists] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -68,10 +66,8 @@ export default function SpotifySearch() {
 
     async function fetchArtistAlbums() {
         try {
-            // Fetch artist ID
             const artistId = await fetchArtistId(artistName);
 
-            // Use artistId to fetch albums
             const response = await axios.get(
                 `https://api.spotify.com/v1/artists/${artistId}/albums`,
                 {
@@ -82,6 +78,7 @@ export default function SpotifySearch() {
             );
 
             let albums = response.data.items;
+            console.log("albums raw", albums)
 
             albums = albums
                 .map((album) => {
@@ -91,6 +88,7 @@ export default function SpotifySearch() {
                             date_de_sortie: album.release_date,
                             nombre_total_de_musiques: album.total_tracks,
                             image: album.images[0].url,
+                            id: album.id
                         };
                     } else {
                         return null;
@@ -108,6 +106,34 @@ export default function SpotifySearch() {
         }
     }
 
+    async function fetchArtistAlbumsById(artistId) {
+        try {
+            const response = await axios.get(
+                `https://api.spotify.com/v1/artists/${artistId}/albums`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${credentials.access_token}`,
+                    },
+                }
+            );
+
+            let albums = response.data.items
+                .filter((album) => album.album_type === 'album')
+                .map((album) => ({
+                    nom: album.name,
+                    date_de_sortie: album.release_date,
+                    nombre_total_de_musiques: album.total_tracks,
+                    image: album.images[0]?.url || null,
+                    id: album.id,
+                }));
+
+            setAlbums(albums);
+            setError(null);
+            console.log("Albums dans le state :", albums);
+        } catch (error) {
+            console.error("Pas d'album trouvé pour cet artiste :", error);
+        }
+    }
     async function fetchSimilarArtistsByName(artistName) {
         try {
             const response = await axios.get(
@@ -120,19 +146,23 @@ export default function SpotifySearch() {
             );
 
             const artists = response.data.artists.items.map((artist) => {
+                const imageUrl = artist.images.length > 0 ? artist.images[0].url : null;
+
                 return {
-                    image: artist.images[0].url,
+                    image: imageUrl,
                     name: artist.name,
                     id: artist.id,
                     popularity: artist.popularity,
                 };
             });
 
+
             const sortedArtists = artists.sort((a, b) => b.popularity - a.popularity);
 
             console.log(artists);
             setSimilarArtists(sortedArtists);
         } catch (error) {
+            console.log(error)
             setError('Artiste introuvable. Veuillez réessayer.');
             throw error;
         }
@@ -141,19 +171,28 @@ export default function SpotifySearch() {
     const handleButtonClick = async () => {
         try {
             setLoading(true);
+            setSimilarArtists([]);
             await fetchArtistAlbums();
         } catch (error) {
+            //
         } finally {
             setTimeout(() => {
                 setLoading(false);
-            }, 3000);
+            }, 300);
         }
     };
+
+    const handleSimilarArtistClick = async (artist) => {
+        setArtistName(artist.name);
+        setSimilarArtists([]);
+        await fetchArtistAlbumsById(artist.id);
+    };
+
 
     return (
         <>
             <div className={'h-screen w-screen py-32 px-52 overflow-y-auto'}>
-                <p className={"text-2xl font-bold py-2"}>SpotifySearch</p>
+                <p className={"text-2xl font-bold py-2"}>SpotifyResearch</p>
                 <p className={"py-2"}>Passionnés par la musique, nous avons décidé d'exploiter l'API Spotify sur deux
                     pages de notre projet.
                     <br/>Dans cette section, il vous suffit d'entrer le nom d'un artiste pour accéder à sa discographie
@@ -174,12 +213,12 @@ export default function SpotifySearch() {
                         value={artistName}
                         required={true}
                         onChange={(e) => setArtistName(e.target.value)}
-                        onEnterPress={handleButtonClick} // Appeler la fonction handleButtonClick lors de l'appui sur "Entrée"
+                        onEnterPress={handleButtonClick}
                     />
 
                     <Button
                         title={'Rechercher'}
-                        className={'ml-2 font-normal border-black border-dashed bg-emerald-300 hover:bg-emerald-400 '}
+                        className={'w-28 h-10 ml-2 font-normal border-black border-dashed bg-emerald-300 hover:bg-emerald-400 '}
                         onClick={handleButtonClick}
                         loading={loading}
                     />
@@ -187,37 +226,45 @@ export default function SpotifySearch() {
 
 
                 {error && <div className={"text-red-400"}>{error}</div>}
+                {albums.length !== 0 && (
+                    <div className={"mt-2"}>
+
+                        <a className={"text-gray-500 hover:text-red-500 cursor-pointer hover:underline mt-3"}
+                           onClick={() => fetchSimilarArtistsByName(artistName)}>Ce n'est pas l'artiste que vous
+                            cherchez
+                            ?</a>
+                    </div>
+                )}
                 {similarArtists.length !== 0 && (
                     <>
-                        <h2>Artistes similaires qui pourraient t'intéresser !</h2>
-                        <div className={"flex space-x-4"}>
-                            {similarArtists.map((artist) => (
-                                <span key={artist.id} className={"text-center"}>
-                                    <div>
-                                        <img src={artist.image} alt={`Image for ${artist.name}`}
-                                             className={"w-14 h-14"}/>
-                                    <p
-                                        className={'text-blue-500 hover:text-blue-700 cursor-pointer hover:underline'}
-                                        onClick={() => {
-                                            setArtistName(artist.name);
-                                            setSimilarArtists([]);
-                                            fetchArtistAlbums();
-                                        }}
-                                    >
-                                        {artist.name}
-                                    </p>
-                                    </div>
-
-                                </span>
-                            ))}
+                        <div className={"mt-4 bg-gray-100"}>
+                            <h2 className={" w-fit px-2 pt-1 rounded-t-sm"}>Artistes similaires qui pourraient
+                                t'intéresser !</h2>
+                            <div className={"flex space-x-2 bg-gray-100 rounded-sm justify-center py-2"}>
+                                {similarArtists.map((artist, index) => (
+                                    <span key={artist.id} className={"text-center"}>
+                        <div
+                            className={`p-2 ${index === 0 ? 'ml-2' : ''} ${index === similarArtists.length - 1 ? 'mr-2' : ''} 
+                            border rounded hover:cursor-pointer hover:ring-2 ring-inset ring-gray-200 border-gray-300`}
+                            onClick={() => handleSimilarArtistClick(artist)}
+                        >
+                            <div className={"flex justify-center"}>
+                                <img src={artist.image}
+                                     alt={`${artist.name}`}
+                                     className={"w-14 h-14 rounded"}
+                                />
+                            </div>
+                            <p className={'text-gray-700'}>
+                                {artist.name}
+                            </p>
+                        </div>
+                    </span>
+                                ))}
+                            </div>
                         </div>
                     </>
                 )}
-                {albums.length !== 0 && (
-                    <a className={"text-gray-500 hover:text-red-500 cursor-pointer hover:underline mt-2"}
-                       onClick={() => fetchSimilarArtistsByName(artistName)}>Ce n'est pas l'artiste que vous cherchez
-                        ?</a>
-                )}
+
                 <AlbumList data={albums}/>
 
             </div>

@@ -1,7 +1,7 @@
-import { RiLoader4Fill } from "react-icons/ri";
+import {RiLoader4Fill} from "react-icons/ri";
 
-export default function Button({ title, onClick, className, loading, ...props }) {
-    const buttonClassName = `border font-bold rounded-sm w-28 h-10 flex items-center justify-center ${className || ''}`;
+export default function Button({title, onClick, className, loading, ...props}) {
+    const buttonClassName = `border font-bold rounded-sm px-4 py-2 flex items-center justify-center ${className || ''}`;
 
     return (
         <>
@@ -12,7 +12,7 @@ export default function Button({ title, onClick, className, loading, ...props })
                 {...props}
             >
                 {loading ? (
-                    <RiLoader4Fill className={'animate-spin text-xl '} />
+                    <RiLoader4Fill className={'animate-spin text-xl '}/>
                 ) : (
                     title
                 )}
