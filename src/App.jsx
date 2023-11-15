@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Navbar from './components/NavBar/NavBar'
 import Home from './pages/Home'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Contact from './pages/Contact';
 import About from './pages/Meme';
 import Conferences from './pages/Albumdujour';
 import SpotifySearch from "./pages/SpotifyResearch.jsx";
@@ -23,7 +22,6 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 {/* <Route path="/projet/:id" element={<Projet />} /> */}
-                <Route path="/contacts" element={<Contact />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/conferences" element={<Conferences />} />
                 <Route path ="/spotify_research" element={<SpotifySearch/>}/>
