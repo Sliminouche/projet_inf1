@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import AlbumButton from '../components/AlbumButton/AlbumButton.jsx';
+import {fetchSpotifyCredentials} from "../services/SpotifyService.jsx";
 
 const AlbumduJour = () => {
   const [albums, setAlbums] = useState([]);
@@ -9,32 +10,20 @@ const AlbumduJour = () => {
   const [error, setError] = useState(null);
   const [selectedAlbum, setSelectedAlbum] = useState(null);
 
+
   useEffect(() => {
-    async function fetchCredentials() {
+    async function fetchAndSetCredentials() {
       try {
-        const client_id = '22c26789d4534a458986c5eca89a9584';
-        const client_secret = '2bb27261914f464184809d8c17a320d7';
-
-        const authOptions = {
-          method: 'post',
-          url: 'https://accounts.spotify.com/api/token',
-          headers: {
-            'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          data: 'grant_type=client_credentials',
-        };
-
-        const response = await axios(authOptions);
-
-        setCredentials(response.data);
+        const credentials = await fetchSpotifyCredentials();
+        setCredentials(credentials);
       } catch (error) {
-        console.error('erreur authentification : ', error);
+        console.log('Erreur lors de la récupération des credentials : ', error);
       }
     }
 
-    fetchCredentials();
+    fetchAndSetCredentials();
   }, []);
+
 
   useEffect(() => {
     async function fetchAlbums() {

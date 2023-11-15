@@ -2,39 +2,16 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import AlbumDetailsModal from "./Modals/AlbumDetailsModal.jsx";
 
-const AlbumList = ({data}) => {
+const AlbumList = ({data, spotifyCredentials}) => {
 
-    const [credentials, setCredentials] = useState({}); // les credentials d'auth
     const [albumTracks, setAlbumTracks] = useState([]); // les tracks de l'album sélectionné
     const [selectedAlbum, setSelectedAlbum] = useState(null); // album sélectionné pour le modal
     const [isModalOpen, setIsModalOpen] = useState(false); // état du modal
 
     useEffect(() => {
-        async function fetchCredentials() {
-            try {
-                const client_id = '22c26789d4534a458986c5eca89a9584';
-                const client_secret = '2bb27261914f464184809d8c17a320d7';
+        console.log('Credentials dans le composant fils :', spotifyCredentials);
+    }, [spotifyCredentials]);
 
-                const authOptions = {
-                    method: 'post',
-                    url: 'https://accounts.spotify.com/api/token',
-                    headers: {
-                        'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    data: 'grant_type=client_credentials',
-                };
-
-                const response = await axios(authOptions);
-
-                setCredentials(response.data);
-            } catch (error) {
-                console.error('erreur authentification : ', error);
-            }
-        }
-
-        fetchCredentials();
-    }, []);
 
     async function fetchAlbumTrackWithId(albumId) {
         if (albumId.trim() !== '') {
@@ -43,7 +20,7 @@ const AlbumList = ({data}) => {
                     `https://api.spotify.com/v1/albums/${albumId}/tracks`,
                     {
                         headers: {
-                            Authorization: `Bearer ${credentials.access_token}`
+                            Authorization: `Bearer ${spotifyCredentials.access_token}`
                         },
                     }
                 );

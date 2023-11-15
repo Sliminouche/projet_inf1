@@ -3,6 +3,7 @@ import axios from 'axios';
 import Input from '../components/Input.jsx';
 import Button from '../components/Button/Button.jsx';
 import AlbumList from '../components/AlbumList.jsx';
+import {fetchSpotifyCredentials} from "../services/SpotifyService.jsx";
 
 export default function SpotifyResearch() {
     const [albums, setAlbums] = useState([]);
@@ -14,31 +15,18 @@ export default function SpotifyResearch() {
 
 
     useEffect(() => {
-        async function fetchCredentials() {
+        async function fetchAndSetCredentials() {
             try {
-                const client_id = '22c26789d4534a458986c5eca89a9584';
-                const client_secret = '2bb27261914f464184809d8c17a320d7';
-
-                const authOptions = {
-                    method: 'post',
-                    url: 'https://accounts.spotify.com/api/token',
-                    headers: {
-                        'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    data: 'grant_type=client_credentials',
-                };
-
-                const response = await axios(authOptions);
-
-                setCredentials(response.data);
+                const credentials = await fetchSpotifyCredentials();
+                setCredentials(credentials);
             } catch (error) {
-                console.error('erreur authentification : ', error);
+                console.log(error)
             }
         }
 
-        fetchCredentials();
+        fetchAndSetCredentials();
     }, []);
+
 
     async function fetchArtistId(artistName) {
         if (artistName.trim() === '') {
@@ -134,6 +122,7 @@ export default function SpotifyResearch() {
             console.error("Pas d'album trouvé pour cet artiste :", error);
         }
     }
+
     async function fetchSimilarArtistsByName(artistName) {
         try {
             const response = await axios.get(
@@ -265,7 +254,7 @@ export default function SpotifyResearch() {
                     </>
                 )}
 
-                <AlbumList data={albums}/>
+                <AlbumList data={albums} spotifyCredentials={credentials}/>
 
             </div>
         </>
