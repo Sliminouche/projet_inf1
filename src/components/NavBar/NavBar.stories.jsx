@@ -1,37 +1,20 @@
 import React from 'react';
-import NavBar from './NavBar';
+import Navbar from './Navbar';
 
 export default {
-    component: NavBar,
-    title: 'component/NavBar'
+  title: 'Navbar',
+  component: Navbar,
 };
-
 
 const Template = (args) => <NavBar {...args} />
 
-export  const Default = Template.bind({});
+export const Default = Template.bind({});
+Default.args = {};
 
-Default.args = {
-    children: 'NavBar',
-    loading: false,
-    disabled: false,
-}
+export const WithDifferentProps = Template.bind({});
+WithDifferentProps.args = {
+  // Pass different props if needed
+  // Example: toggle: true
+};
 
-/*
-export const Loading = Template.bind({});
-
-Loading.args = {
-    children: 'Button',
-    loading: true,
-    disabled: false,
-
-}
-
-export const Disabled = Template.bind({});
-
-Disabled.args = {
-    children: 'Button',
-    disabled: true,
-    loading: false,
-}
-*/
+// You can add more stories as needed

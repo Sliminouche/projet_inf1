@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import facebook from '../assets/facebook.svg';
-import twitter from '../assets/twitter.svg';
-import linkedin from '../assets/linkedin.svg';
 
 const Item = ({ gifUrl, gifName }) => {
   const navigate = useNavigate();
@@ -109,24 +106,6 @@ const Home = () => {
       {gifs.map((gifData, index) => (
         <Item key={index} gifUrl={gifData.url} gifName={gifData.name} />
       ))}
-
-      <div className="fixed z-20 bottom-4 left-4 flex flex-col gap-4 justify-center items-center">
-        <img
-          src={facebook}
-          alt=""
-          className="cursor-pointer hover:scale-110 transition duration-200"
-        />
-        <img
-          src={twitter}
-          alt=""
-          className="cursor-pointer hover:scale-110 transition duration-200 h"
-        />
-        <img
-          src={linkedin}
-          alt=""
-          className="cursor-pointer hover:scale-110 transition duration-200"
-        />
-      </div>
     </div>
   );
 };
