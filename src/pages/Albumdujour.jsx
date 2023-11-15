@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import AlbumButton from '../components/AlbumButton/AlbumButton.jsx';
 
-const SpotifySearch = () => {
+const AlbumduJour = () => {
   const [albums, setAlbums] = useState([]);
   const [credentials, setCredentials] = useState({});
   const [error, setError] = useState(null);
@@ -87,4 +87,4 @@ const SpotifySearch = () => {
   );
 };
 
-export default SpotifySearch;
+export default AlbumduJour;

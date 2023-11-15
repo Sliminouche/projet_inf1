@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormComponent from "../components/formulaire";
 import MemeComponent from "../components/MemeImage/memeImage";
 
-const About = () => {
+const MemePage = () => {
   const [Memes, setMemes] = useState([]);
   const apiUrl = "https://api.imgflip.com/get_memes";
   const [Image, setImage] = useState({
@@ -59,4 +59,4 @@ const About = () => {
   )
 }
 
-export default About
+export default MemePage

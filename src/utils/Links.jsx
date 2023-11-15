@@ -5,11 +5,11 @@ export const navlinks=[
     },
     {
         title:"Créer ton meme",
-        link:"about"
+        link:"creerunmeme"
     },
     {
         title:"Ecoute un album",
-        link:"conferences"
+        link:"trouveralbum"
     },
     {
         title:"SpotifyResearch",
