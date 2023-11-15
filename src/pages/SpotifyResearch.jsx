@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import Input from '../components/Input.jsx';
+import Input from '../components/Input/Input.jsx';
 import Button from '../components/Button/Button.jsx';
 import AlbumList from '../components/AlbumList.jsx';
 import {fetchSpotifyCredentials} from "../services/SpotifyService.jsx";
