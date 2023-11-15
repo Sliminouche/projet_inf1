@@ -65,22 +65,26 @@ const SpotifySearch = () => {
   return (
     <div className="p-16">
       {error && <p className="text-red-500">{error}</p>}
-       <AlbumButton
-        title={" Quel album écouter aujourd'hui ?"}
-        className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}
-        onClick={handleRandomAlbum}
-      />
+      <div className='flex justify-center mt-12'>
+        <AlbumButton
+          title={" Quel album écouter aujourd'hui ?"}
+          className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}
+          onClick={handleRandomAlbum}
+        />
+      </div>
+
       {selectedAlbum && (
         <div className="mt-8">
-          <h2 className="text-2xl font-bold">Album recommandé :</h2>
-          <img src={selectedAlbum.images[0].url} alt={selectedAlbum.name} className="mt-4 rounded shadow-lg" />
-          <p className="text-xl font-bold mt-4">{selectedAlbum.name}</p>
-          <p className="text-gray-500">{selectedAlbum.release_date}</p>
+          <h2 className="text-2xl font-bold flex justify-center">Album recommandé :</h2>
+          <div className="flex justify-center"> {/* Center the content */}
+            <img src={selectedAlbum.images[0].url} alt={selectedAlbum.name} className="mt-4 rounded shadow-lg" />
+          </div>
+          <p className="text-xl font-bold mt-4 flex justify-center">{selectedAlbum.name}</p>
+          <p className="text-gray-500 flex justify-center">{selectedAlbum.release_date}</p>
         </div>
       )}
     </div>
   );
 };
-
 
 export default SpotifySearch;
