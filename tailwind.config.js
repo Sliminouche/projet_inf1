@@ -10,6 +10,9 @@ module.exports = {
             fontSize: {
                 14: '14px',
             },
+            colors: {
+                'rose-moche': '#C58882',
+            },
             backgroundColor: {
                 'main-bg': '#FAFBFB',
                 'main-dark-bg': '#20232A',

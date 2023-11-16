@@ -102,7 +102,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className={`px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 py-10 ${loading ? 'loading' : ''}`}style={{backgroundColor:"#D1DEDE" }} >
+    <div className={`px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 py-10 ${loading ? 'loading' : ''}`}style={{backgroundColor:"#D1DEDE", paddingTop:"100px" }} >
       {gifs.map((gifData, index) => (
         <Item key={index} gifUrl={gifData.url} gifName={gifData.name} />
       ))}

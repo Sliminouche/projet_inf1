@@ -75,7 +75,7 @@ const AlbumList = ({data, spotifyCredentials}) => {
     if (data.length === 0) {
         return  (
             <div className={"flex justify-center"}>
-                <p className={"text-2xl text-gray-500 mt-36"}>Aucun résultat pour cet artiste !</p>
+                <p className={"text-2xl text-gray-500 mt-36"}>Aucun résultat pour cet artiste.</p>
             </div>
         )
     } else {

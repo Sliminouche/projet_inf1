@@ -192,7 +192,10 @@ export default function SpotifyResearch() {
                     <ul className={"list-disc ml-12 mt-1"}>
                         <li>Entrez le nom d'un artiste que vous appréciez et cliquez sur le
                             bouton <strong>"Rechercher"</strong></li>
-                        <li>Une fois la liste d'albums chargée, cliquez</li>
+                        <li>Une fois la liste d'albums chargée, cliquez sur un des albums listés pour accéder aux détails de ce dernier.</li>
+                        <li>Vous pourrez ainsi visualiser les 20 premières tracks de l'album sélectionné.</li>
+                        <li className={"text-rose-moche"}>Si l'artiste retourné lors de la recherche ne vous convient pas, le lien <strong>Ce n'est pas l'artiste que vous cherchez ?</strong> vous permettra d'afficher une liste de 10 artistes similaires !</li>
+                        <li className={"text-rose-moche"}>Il ne vous reste plus qu'à cliquer sur cet artiste pour afficher automatiquement ses albums.</li>
                     </ul>
                 </div>
                 <div className={"mt-2 flex items-end"}>

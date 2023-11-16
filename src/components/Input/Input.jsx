@@ -9,7 +9,7 @@ export default function Input({label, name, type, value, onChange, className, re
 
     return (
         <div className={"block"}>
-            <label className="block  text-gray-700 font-bold text-sm mb-2" htmlFor={name}>
+            <label className="block text-gray-700 font-bold text-sm mb-2" htmlFor={name}>
                 {label}
             </label>
             <input
