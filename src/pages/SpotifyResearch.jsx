@@ -192,10 +192,17 @@ export default function SpotifyResearch() {
                     <ul className={"list-disc ml-12 mt-1"}>
                         <li>Entrez le nom d'un artiste que vous appréciez et cliquez sur le
                             bouton <strong>"Rechercher"</strong></li>
-                        <li>Une fois la liste d'albums chargée, cliquez sur un des albums listés pour accéder aux détails de ce dernier.</li>
+                        <li>Une fois la liste d'albums chargée, cliquez sur un des albums listés pour accéder aux
+                            détails de ce dernier.
+                        </li>
                         <li>Vous pourrez ainsi visualiser les 20 premières tracks de l'album sélectionné.</li>
-                        <li className={"text-rose-moche"}>Si l'artiste retourné lors de la recherche ne vous convient pas, le lien <strong>Ce n'est pas l'artiste que vous cherchez ?</strong> vous permettra d'afficher une liste de 10 artistes similaires !</li>
-                        <li className={"text-rose-moche"}>Il ne vous reste plus qu'à cliquer sur cet artiste pour afficher automatiquement ses albums.</li>
+                        <li className={"text-rose-moche"}>Si l'artiste retourné lors de la recherche ne vous convient
+                            pas, le lien <strong>Ce n'est pas l'artiste que vous cherchez ?</strong> vous permettra
+                            d'afficher une liste de 10 artistes similaires !
+                        </li>
+                        <li className={"text-rose-moche"}>Il ne vous reste plus qu'à cliquer sur cet artiste pour
+                            afficher automatiquement ses albums.
+                        </li>
                     </ul>
                 </div>
                 <div className={"mt-2 flex items-end"}>
@@ -235,22 +242,22 @@ export default function SpotifyResearch() {
                             <div className={"flex space-x-2 bg-gray-100 rounded-sm justify-center py-2"}>
                                 {similarArtists.map((artist, index) => (
                                     <span key={artist.id} className={"text-center"}>
-                        <div
-                            className={`p-2 ${index === 0 ? 'ml-2' : ''} ${index === similarArtists.length - 1 ? 'mr-2' : ''} 
-                            border rounded hover:cursor-pointer hover:ring-2 ring-inset ring-gray-200 border-gray-300`}
-                            onClick={() => handleSimilarArtistClick(artist)}
-                        >
-                            <div className={"flex justify-center"}>
-                                <img src={artist.image}
-                                     alt={`${artist.name}`}
-                                     className={"w-14 h-14 rounded"}
-                                />
-                            </div>
-                            <p className={'text-gray-700'}>
-                                {artist.name}
-                            </p>
-                        </div>
-                    </span>
+                                        <div
+                                            className={`p-2 ${index === 0 ? 'ml-2' : ''} ${index === similarArtists.length - 1 ? 'mr-2' : ''} 
+                                            border rounded hover:cursor-pointer hover:ring-2 ring-inset ring-gray-200 border-gray-300`}
+                                            onClick={() => handleSimilarArtistClick(artist)}
+                                        >
+                                            <div className={"flex justify-center"}>
+                                                <img src={artist.image}
+                                                     alt={`${artist.name}`}
+                                                     className={"w-14 h-14 rounded"}
+                                                />
+                                            </div>
+                                            <p className={'text-gray-700'}>
+                                                {artist.name}
+                                            </p>
+                                        </div>
+                                    </span>
                                 ))}
                             </div>
                         </div>
