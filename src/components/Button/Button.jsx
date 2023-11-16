@@ -1,7 +1,7 @@
 import {RiLoader4Fill} from "react-icons/ri";
 
 export default function Button({title, onClick, className, loading, ...props}) {
-    const buttonClassName = `border font-bold rounded-sm px-4 py-2 flex items-center justify-center ${className || ''}`;
+    const buttonClassName = `border font-bold rounded-sm px-4 py-2 flex items-center justify-center ${className || 'bg-gray-100'}`;
 
     return (
         <>

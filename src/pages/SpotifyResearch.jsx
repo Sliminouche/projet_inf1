@@ -213,6 +213,7 @@ export default function SpotifyResearch() {
                         required={true}
                         onChange={(e) => setArtistName(e.target.value)}
                         onEnterPress={handleButtonClick}
+                        error={error}
                     />
 
                     <Button

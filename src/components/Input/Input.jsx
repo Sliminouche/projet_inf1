@@ -1,6 +1,5 @@
-export default function Input({label, name, type, value, onChange, className, required, onEnterPress, ...props}) {
-    const inputClassName = `text-sm transition-all focus:ring-2 ring-inset ring-gray-200 outline-0 border px-2 h-10 rounded-sm ${className || ''}`;
-
+export default function Input({label, name, type, value, onChange, className, required, onEnterPress, error, ...props}) {
+    const inputClassName = `text-sm transition-all focus:ring-2 ${error ? 'ring-red-400' : 'ring-gray-200'} ring-inset outline-0 border px-2 h-10 rounded-sm ${className || ''}`;
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             onEnterPress && onEnterPress();
